@@ -10,27 +10,17 @@ public class ActionPlugin : IUniversalPlugin
 
     public string PluginId => "actionplugin";
     public string Version => "1.0";
-    public string[] SupportedCommands => new[] { "execute" };
+    public string[] SupportedCommands => new string[0];
 
     private bool _isExecuting = false;
 
-    public void Initialize(byte[] initData) { }
+    public void Initialize(byte[] initData) 
+    {
+        var result = PerformAction();
+    }
 
     public PluginResult ExecuteCommand(string command, byte[] parameters)
     {
-        if (command == "execute")
-        {
-            _isExecuting = true;
-            var result = PerformAction();
-            _isExecuting = false;
-
-            return new PluginResult
-            {
-                Success = true,
-                Message = result,
-                ShouldUnload = true
-            };
-        }
         return new PluginResult { Success = false, Message = "Unknown command" };
     }
 
