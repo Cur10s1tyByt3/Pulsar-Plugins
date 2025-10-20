@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Pulsar.Common.Plugins;
+using System;
 using System.Runtime.InteropServices;
 using System.Text;
-using Pulsar.Common.Plugins;
 
 namespace ActionPlugins
 {

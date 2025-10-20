@@ -1,14 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36408.4 d17.14
+VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Example.Client", "Plugin.Example.Client\Plugin.Example.Client.csproj", "{9B5437BD-DD9F-426F-B9A8-5139A3334B79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Common", "External\Poopsar\Pulsar.Common\Pulsar.Common.csproj", "{0B95FC2E-2593-108E-45FD-378A158F2E32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pulsar.Plugin.Example", "Pulsar.Plugin.Example", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pulsar.Plugin.MessageBox", "Pulsar.Plugin.MessageBox", "{12C2D2FF-A1C6-49DC-BA2F-E1D409BE487E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.Example.Client", "Pulsar.Plugin.Example\Pulsar.Plugin.Example.Client\Pulsar.Plugin.Example.Client.csproj", "{5769BC8E-15B9-4B64-9BF6-D492A7755582}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0B95FC2E-2593-108E-45FD-378A158F2E32} = {0B95FC2E-2593-108E-45FD-378A158F2E32}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Common", "External\Poopsar\Pulsar.Common\Pulsar.Common.csproj", "{0B95FC2E-2593-108E-45FD-378A158F2E32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.MessageBox.Client", "Pulsar.Plugin.MessageBox\Pulsar.Plugin.MessageBox.Client\Pulsar.Plugin.MessageBox.Client.csproj", "{E8230BD0-9FC7-47E6-B075-F769E03ACCA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.MessageBox.Server", "Pulsar.Plugin.MessageBox\Pulsar.Plugin.MessageBox.Server\Pulsar.Plugin.MessageBox.Server.csproj", "{B3FC3271-B6B1-4C2D-8008-B91C11A2F400}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0B95FC2E-2593-108E-45FD-378A158F2E32} = {0B95FC2E-2593-108E-45FD-378A158F2E32}
+		{E26DF779-8FCA-0041-D19B-C7F0D1DF655E} = {E26DF779-8FCA-0041-D19B-C7F0D1DF655E}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Server", "External\Poopsar\Pulsar.Server\Pulsar.Server.csproj", "{E26DF779-8FCA-0041-D19B-C7F0D1DF655E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,17 +30,34 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9B5437BD-DD9F-426F-B9A8-5139A3334B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B5437BD-DD9F-426F-B9A8-5139A3334B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B5437BD-DD9F-426F-B9A8-5139A3334B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B5437BD-DD9F-426F-B9A8-5139A3334B79}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0B95FC2E-2593-108E-45FD-378A158F2E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0B95FC2E-2593-108E-45FD-378A158F2E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B95FC2E-2593-108E-45FD-378A158F2E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B95FC2E-2593-108E-45FD-378A158F2E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5769BC8E-15B9-4B64-9BF6-D492A7755582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5769BC8E-15B9-4B64-9BF6-D492A7755582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5769BC8E-15B9-4B64-9BF6-D492A7755582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5769BC8E-15B9-4B64-9BF6-D492A7755582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8230BD0-9FC7-47E6-B075-F769E03ACCA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8230BD0-9FC7-47E6-B075-F769E03ACCA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8230BD0-9FC7-47E6-B075-F769E03ACCA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8230BD0-9FC7-47E6-B075-F769E03ACCA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3FC3271-B6B1-4C2D-8008-B91C11A2F400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3FC3271-B6B1-4C2D-8008-B91C11A2F400}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3FC3271-B6B1-4C2D-8008-B91C11A2F400}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3FC3271-B6B1-4C2D-8008-B91C11A2F400}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E26DF779-8FCA-0041-D19B-C7F0D1DF655E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E26DF779-8FCA-0041-D19B-C7F0D1DF655E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E26DF779-8FCA-0041-D19B-C7F0D1DF655E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E26DF779-8FCA-0041-D19B-C7F0D1DF655E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5769BC8E-15B9-4B64-9BF6-D492A7755582} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{E8230BD0-9FC7-47E6-B075-F769E03ACCA8} = {12C2D2FF-A1C6-49DC-BA2F-E1D409BE487E}
+		{B3FC3271-B6B1-4C2D-8008-B91C11A2F400} = {12C2D2FF-A1C6-49DC-BA2F-E1D409BE487E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B6F93F9-C76A-4DA8-B2AB-17B7848DB21A}
