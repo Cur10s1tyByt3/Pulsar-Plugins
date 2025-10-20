@@ -1,35 +1,42 @@
-﻿using Pulsar.Common.Plugins;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+using System.Text;
+using Pulsar.Common.Plugins;
 
-public class ActionPlugin : IUniversalPlugin
+namespace ActionPlugins
 {
-    //messagebox
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    public static extern int MessageBox(IntPtr hWnd, string text, string caption, uint type);
-
-    public string PluginId => "actionplugin";
-    public string Version => "1.0";
-    public string[] SupportedCommands => new string[0];
-
-    private bool _isExecuting = false;
-
-    public void Initialize(byte[] initData) 
+    public sealed class ActionPlugin : IUniversalPlugin
     {
-        var result = PerformAction();
-    }
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        private static extern int MessageBox(IntPtr hWnd, string text, string caption, uint type);
 
-    public PluginResult ExecuteCommand(string command, byte[] parameters)
-    {
-        return new PluginResult { Success = false, Message = "Unknown command" };
-    }
+        public string PluginId => "actionplugin";
+        public string Version => "1.0.0";
+        public string[] SupportedCommands => Array.Empty<string>();
 
-    public bool IsComplete => !_isExecuting;
-    public void Cleanup() { _isExecuting = false; }
+        public void Initialize(byte[] initData)
+        {
+            var message = (initData != null && initData.Length > 0)
+                ? Encoding.UTF8.GetString(initData)
+                : "Action executed!";
 
-    private string PerformAction()
-    {
-        MessageBox(IntPtr.Zero, "Action executed!", "Action Plugin", 0);
-        return "Action executed successfully.";
+            MessageBox(IntPtr.Zero, message, "Action Plugin", 0);
+        }
+
+        public PluginResult ExecuteCommand(string command, byte[] parameters)
+        {
+            return new PluginResult
+            {
+                Success = false,
+                Message = "No commands supported",
+                ShouldUnload = true
+            };
+        }
+
+        public bool IsComplete => true;
+
+        public void Cleanup()
+        {
+        }
     }
 }
