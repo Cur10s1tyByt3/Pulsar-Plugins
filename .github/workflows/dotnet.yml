@@ -79,24 +79,10 @@ jobs:
           Get-ChildItem -Path $env:OUTPUT_DIR -Recurse
         shell: pwsh
 
-      - name: Set Signer Path
-        run: echo "SIGNER_PATH=$env:RUNNER_TEMP\signer.pfx" >> $env:GITHUB_ENV
-        shell: pwsh
-
-      - name: Decode PFX Certificate
+      - name: Sign DLLs (optional)
         run: |
-          if ("${{ secrets.SIGNER_PFX }}" -eq "") {
-            Write-Host "WARNING: SIGNER_PFX secret is empty!"
-            exit 1
-          }
-          Write-Host "SIGNER_PFX secret length: $("${{ secrets.SIGNER_PFX }}".Length) characters"
-          [IO.File]::WriteAllBytes($env:SIGNER_PATH, [Convert]::FromBase64String("${{ secrets.SIGNER_PFX }}"))
-          Write-Host "PFX file created at: $env:SIGNER_PATH"
-          Write-Host "PFX file size: $(Get-Item $env:SIGNER_PATH | Select-Object -ExpandProperty Length) bytes"
-        shell: pwsh
-
-      - name: Sign DLLs
-        run: |
+          $env:SIGNER_PATH = "$env:RUNNER_TEMP\signer.pfx"
+          [IO.File]::WriteAllBytes($env:SIGNER_PATH, [Convert]::FromBase64String("${{ secrets.PLUGIN_SIGNING_PFX }}"))
           $password = "${{ secrets.PFX_PASSWORD }}"
           $dlls = Get-ChildItem -Path $env:OUTPUT_DIR -Filter *.dll
           foreach ($dll in $dlls) {
