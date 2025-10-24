@@ -14,16 +14,18 @@ namespace ActionPlugins
         public string Version => "1.0.0";
         public string[] SupportedCommands => Array.Empty<string>();
 
-        public void Initialize(byte[] initData)
+        public void Initialize(Object initData)
         {
-            var message = (initData != null && initData.Length > 0)
-                ? Encoding.UTF8.GetString(initData)
+            byte[] convertedData = initData as byte[];
+
+            var message = (initData != null && convertedData.Length > 0)
+                ? Encoding.UTF8.GetString(convertedData)
                 : "Action executed!";
 
             MessageBox(IntPtr.Zero, message, "Action Plugin", 0);
         }
 
-        public PluginResult ExecuteCommand(string command, byte[] parameters)
+        public PluginResult ExecuteCommand(string command, Object parameters)
         {
             return new PluginResult
             {

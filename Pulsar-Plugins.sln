@@ -36,6 +36,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.UserCheck.Ser
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PersonDetector", "Pulsar.Plugin.UserCheck\PersonDetector\PersonDetector\PersonDetector.pyproj", "{B16B99F6-E593-4226-B77D-3E838A414308}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pulsar.Plugin.RanReg", "Pulsar.Plugin.RanReg", "{F9DBEE0F-2FC9-4782-9763-BA2750EC1D97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.RanReg.Server", "Pulsar.Plugin.RanReg\Pulsar.Plugin.RanReg.Server\Pulsar.Plugin.RanReg.Server.csproj", "{6D63F70E-1403-4992-AD58-32A2B3C56B23}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0B95FC2E-2593-108E-45FD-378A158F2E32} = {0B95FC2E-2593-108E-45FD-378A158F2E32}
+		{E26DF779-8FCA-0041-D19B-C7F0D1DF655E} = {E26DF779-8FCA-0041-D19B-C7F0D1DF655E}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.RanReg.Client", "Pulsar.Plugin.RanReg\Pulsar.Plugin.RanReg.Client\Pulsar.Plugin.RanReg.Client.csproj", "{8E416C4D-94D6-4271-948C-F68547A713CF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0B95FC2E-2593-108E-45FD-378A158F2E32} = {0B95FC2E-2593-108E-45FD-378A158F2E32}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +85,14 @@ Global
 		{0B690643-E5F1-4491-8D49-42A03C597876}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B16B99F6-E593-4226-B77D-3E838A414308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B16B99F6-E593-4226-B77D-3E838A414308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D63F70E-1403-4992-AD58-32A2B3C56B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D63F70E-1403-4992-AD58-32A2B3C56B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D63F70E-1403-4992-AD58-32A2B3C56B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D63F70E-1403-4992-AD58-32A2B3C56B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E416C4D-94D6-4271-948C-F68547A713CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E416C4D-94D6-4271-948C-F68547A713CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E416C4D-94D6-4271-948C-F68547A713CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E416C4D-94D6-4271-948C-F68547A713CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +104,8 @@ Global
 		{AED915B3-9E58-4896-97EE-A1B4D4CD16CE} = {D502ED50-057E-443D-8357-4833A4951121}
 		{0B690643-E5F1-4491-8D49-42A03C597876} = {D502ED50-057E-443D-8357-4833A4951121}
 		{B16B99F6-E593-4226-B77D-3E838A414308} = {D502ED50-057E-443D-8357-4833A4951121}
+		{6D63F70E-1403-4992-AD58-32A2B3C56B23} = {F9DBEE0F-2FC9-4782-9763-BA2750EC1D97}
+		{8E416C4D-94D6-4271-948C-F68547A713CF} = {F9DBEE0F-2FC9-4782-9763-BA2750EC1D97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B6F93F9-C76A-4DA8-B2AB-17B7848DB21A}

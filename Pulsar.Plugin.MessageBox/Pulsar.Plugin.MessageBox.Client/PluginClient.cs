@@ -17,13 +17,13 @@ namespace Pulsar.Plugin.MessageBox.Client
         private bool _isComplete = false;
         public bool IsComplete => _isComplete;
 
-        public void Initialize(byte[] initData)
+        public void Initialize(Object initData)
         {
             // Plugin loaded and ready
             // initData could contain default configuration if needed
         }
 
-        public PluginResult ExecuteCommand(string command, byte[] parameters)
+        public PluginResult ExecuteCommand(string command, Object parameters)
         {
             try
             {
@@ -48,12 +48,14 @@ namespace Pulsar.Plugin.MessageBox.Client
             }
         }
 
-        private PluginResult ShowMessageBox(byte[] parameters)
+        private PluginResult ShowMessageBox(Object parameters)
         {
             try
             {
-                string message = parameters != null && parameters.Length > 0
-                    ? Encoding.UTF8.GetString(parameters)
+                byte[] bytes = parameters as byte[];
+
+                string message = parameters != null && bytes.Length > 0
+                    ? Encoding.UTF8.GetString(bytes)
                     : "Default message from Pulsar";
 
                 DialogResult result = System.Windows.Forms.MessageBox.Show(
