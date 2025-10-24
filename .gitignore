@@ -209,3 +209,5 @@ FakesAssemblies/
 # Deferred assembly payloads (runtime-delivered DLLs)
 Pulsar.Server/DeferredAssemblies/*
 !Pulsar.Server/DeferredAssemblies/README.md
+
+SignTest

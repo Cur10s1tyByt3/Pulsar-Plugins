@@ -1,0 +1,102 @@
+name: Pulsar Plugin Release
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    env:
+      BUILD_CONFIG: Release
+      SIGNER_PATH: ${{ runner.temp }}\signer.pfx
+      OUTPUT_DIR: ${{ github.workspace }}\build_plugins
+      ZIP_NAME: plugins-${{ github.run_number }}.zip
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup .NET 9.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore Dependencies
+        run: dotnet restore Pulsar-Plugins.sln
+
+      - name: Build All Projects
+        run: dotnet build Pulsar-Plugins.sln --configuration $env:BUILD_CONFIG --no-restore
+
+      - name: Prepare Output Folder
+        run: |
+          if (Test-Path $env:OUTPUT_DIR) { Remove-Item $env:OUTPUT_DIR -Recurse -Force }
+          New-Item -ItemType Directory -Path $env:OUTPUT_DIR | Out-Null
+        shell: pwsh
+
+      - name: Collect Plugin DLLs
+        run: |
+          Get-ChildItem -Path . -Recurse -Filter "*.dll" | ForEach-Object {
+            $dll = $_.FullName
+            $folder = Split-Path (Split-Path $dll -Parent) -Leaf
+            $name = Split-Path $dll -LeafBase
+            if ($name -eq $folder) {
+              Write-Host "Copying $dll"
+              Copy-Item $dll -Destination $env:OUTPUT_DIR -Force
+            }
+          }
+        shell: pwsh
+
+      - name: Decode PFX Certificate
+        run: |
+          [IO.File]::WriteAllBytes($env:SIGNER_PATH, [Convert]::FromBase64String("${{ secrets.SIGNER_PFX }}"))
+        shell: pwsh
+
+      - name: Sign DLLs
+        run: |
+          $password = "${{ secrets.PFX_PASSWORD }}"
+          $dlls = Get-ChildItem -Path $env:OUTPUT_DIR -Filter *.dll
+          foreach ($dll in $dlls) {
+            Write-Host "Signing $($dll.Name)..."
+            & "C:\Program Files (x86)\Windows Kits\10\bin\x64\signtool.exe" sign `
+              /f $env:SIGNER_PATH `
+              /p $password `
+              /fd sha256 `
+              /tr http://timestamp.digicert.com `
+              /td sha256 `
+              "$($dll.FullName)"
+          }
+        shell: pwsh
+
+      - name: Zip Plugins
+        run: |
+          Compress-Archive -Path "$env:OUTPUT_DIR\*" -DestinationPath "$env:ZIP_NAME"
+        shell: pwsh
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pulsar-plugins
+          path: ${{ env.ZIP_NAME }}
+
+      - name: Delete existing release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete Plugins-${{ github.run_number }} --yes --cleanup-tag || echo "No existing release/tag to delete"
+        shell: bash
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create Plugins-${{ github.run_number }} ${{ env.ZIP_NAME }} \
+            -t "Pulsar Plugins Build #${{ github.run_number }}" \
+            -n "Automated build and signed plugin bundle."
+        shell: bash
