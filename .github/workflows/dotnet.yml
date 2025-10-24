@@ -32,23 +32,13 @@ jobs:
 
       - name: Clone submodules
         run: |
-          echo "=== Files in repo root ==="
-          ls -la | head -20
-          echo ""
-          echo "=== Checking .gitmodules ==="
-          cat .gitmodules
-          echo ""
-          echo "=== Git config ==="
-          git config --file .gitmodules --list
-          echo ""
-          echo "=== Submodule status before ==="
-          git submodule status --recursive || echo "No submodules"
-          echo ""
-          echo "=== Manual submodule add test ==="
-          git submodule add https://github.com/Quasar-Continuation/Poopsar.git External/Poopsar-test || echo "Add failed"
-          echo ""
-          echo "=== Directory listing ==="
-          ls -la External/
+          git config --file .gitmodules --name-only --get-regexp path | while read path_key; do
+            path=$(git config --file .gitmodules --get "$path_key")
+            url_key=$(echo "$path_key" | sed 's/\.path$/.url/')
+            url=$(git config --file .gitmodules --get "$url_key")
+            echo "Cloning $url into $path"
+            git clone --recursive "$url" "$path"
+          done
         shell: bash
 
       - name: Setup .NET 9.0
