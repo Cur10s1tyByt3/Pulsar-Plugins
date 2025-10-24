@@ -22,6 +22,18 @@ jobs:
           submodules: recursive
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Debug submodules
+        run: |
+          echo "=== Checking submodule status ==="
+          git submodule status --recursive
+          echo "=== Forcing full recursive update ==="
+          git submodule update --init --recursive --force
+          echo "=== Final status ==="
+          git submodule status --recursive
+          echo "=== Listing External/Poopsar ==="
+          ls -la External/Poopsar/
+        shell: bash
+
       - name: Setup .NET 9.0
         uses: actions/setup-dotnet@v4
         with:
