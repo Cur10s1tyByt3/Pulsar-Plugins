@@ -23,9 +23,15 @@ jobs:
 
       - name: Clone submodules
         run: |
+          echo "=== Setting credential helper ==="
           git config --global credential.helper store
+          echo "=== Syncing submodules ==="
           git submodule sync --recursive
+          echo "=== Updating submodules ==="
           git submodule update --init --recursive
+          echo "=== Checking result ==="
+          ls -la External/ || echo "External directory not found"
+          git submodule status --recursive
         shell: bash
 
       - name: Setup .NET 9.0
