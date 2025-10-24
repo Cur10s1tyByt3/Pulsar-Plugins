@@ -17,15 +17,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
+          submodules: recursive
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Recursively clone all submodules
-        run: |
-          git config --global credential.helper store
-          git submodule update --init --recursive
-        shell: bash
 
       - name: Setup .NET 9.0
         uses: actions/setup-dotnet@v4
