@@ -21,7 +21,12 @@ jobs:
         with:
           submodules: recursive
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
+
+      - name: Update submodules (deep clone)
+        run: |
+          git config --global credential.helper store
+          git submodule update --init --recursive --depth=50
+        shell: bash
 
       - name: Setup .NET 9.0
         uses: actions/setup-dotnet@v4
