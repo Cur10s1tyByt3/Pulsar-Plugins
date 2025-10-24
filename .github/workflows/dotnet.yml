@@ -12,7 +12,6 @@ jobs:
 
     env:
       BUILD_CONFIG: Release
-      SIGNER_PATH: ${{ runner.temp }}\signer.pfx
       OUTPUT_DIR: ${{ github.workspace }}\build_plugins
       ZIP_NAME: plugins-${{ github.run_number }}.zip
 
@@ -51,6 +50,11 @@ jobs:
               Copy-Item $dll -Destination $env:OUTPUT_DIR -Force
             }
           }
+        shell: pwsh
+
+      - name: Set Signer Path
+        run: |
+          echo "SIGNER_PATH=$env:RUNNER_TEMP\signer.pfx" >> $env:GITHUB_ENV
         shell: pwsh
 
       - name: Decode PFX Certificate
