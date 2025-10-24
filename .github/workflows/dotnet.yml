@@ -16,16 +16,15 @@ jobs:
       ZIP_NAME: plugins-${{ github.run_number }}.zip
 
     steps:
-      - name: Checkout repository with submodules
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: recursive
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update submodules (deep clone)
+      - name: Recursively clone all submodules
         run: |
           git config --global credential.helper store
-          git submodule update --init --recursive --depth=50
+          git submodule update --init --recursive
         shell: bash
 
       - name: Setup .NET 9.0
