@@ -19,8 +19,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
           fetch-depth: 0
+
+      - name: Ensure Submodules Initialized
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --recursive
+        shell: bash
 
       - name: Setup .NET 9.0
         uses: actions/setup-dotnet@v4
@@ -53,8 +59,7 @@ jobs:
         shell: pwsh
 
       - name: Set Signer Path
-        run: |
-          echo "SIGNER_PATH=$env:RUNNER_TEMP\signer.pfx" >> $env:GITHUB_ENV
+        run: echo "SIGNER_PATH=$env:RUNNER_TEMP\signer.pfx" >> $env:GITHUB_ENV
         shell: pwsh
 
       - name: Decode PFX Certificate
