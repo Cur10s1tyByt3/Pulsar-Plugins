@@ -17,34 +17,15 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
-          submodules: recursive
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
 
-      - name: Debug submodules
+      - name: Clone submodules
         run: |
-          echo "=== Checking if .gitmodules exists ==="
-          ls -la .gitmodules || echo ".gitmodules NOT FOUND"
-          echo ""
-          echo "=== Contents of .gitmodules ==="
-          cat .gitmodules || echo "Cannot read .gitmodules"
-          echo ""
-          echo "=== Git config submodule list ==="
-          git config --file .gitmodules --list || echo "No submodules in config"
-          echo ""
-          echo "=== Checking submodule status ==="
-          git submodule status --recursive
-          echo ""
-          echo "=== Forcing full recursive update ==="
-          git submodule update --init --recursive --force
-          echo ""
-          echo "=== Final status ==="
-          git submodule status --recursive
-          echo ""
-          echo "=== Listing External/ directory ==="
-          ls -la External/ 2>/dev/null || echo "External directory does not exist"
+          git config --global credential.helper store
+          git submodule sync --recursive
+          git submodule update --init --recursive
         shell: bash
 
       - name: Setup .NET 9.0
