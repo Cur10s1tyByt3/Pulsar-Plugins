@@ -63,23 +63,54 @@ jobs:
           Get-ChildItem -Path $env:OUTPUT_DIR | Select-Object Name, Length
         shell: pwsh
 
-      - name: Sign DLLs (optional)
+      - name: Sign DLLs
         run: |
+          Write-Host "Preparing signing environment..."
+
           $env:SIGNER_PATH = "$env:RUNNER_TEMP\signer.pfx"
           [IO.File]::WriteAllBytes($env:SIGNER_PATH, [Convert]::FromBase64String("${{ secrets.PLUGIN_SIGNING_PFX }}"))
           $password = "${{ secrets.PFX_PASSWORD }}"
-          $dlls = Get-ChildItem -Path $env:OUTPUT_DIR -Filter *.dll
-          foreach ($dll in $dlls) {
-            Write-Host "Signing $($dll.Name)..."
-            & "C:\Program Files (x86)\Windows Kits\10\bin\x64\signtool.exe" sign `
-              /f $env:SIGNER_PATH `
-              /p $password `
-              /fd sha256 `
-              /tr http://timestamp.digicert.com `
-              /td sha256 `
-              "$($dll.FullName)"
+
+          $signtool = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin" -Recurse -Filter signtool.exe |
+                      Sort-Object FullName -Descending |
+                      Select-Object -First 1
+
+          if (-not $signtool) {
+            Write-Error "❌ signtool.exe not found on this GitHub runner."
+            exit 1
           }
+
+          Write-Host "✅ Found signtool at: $($signtool.FullName)"
+
+          # Sign all DLLs in the output folder
+          $dlls = Get-ChildItem -Path $env:OUTPUT_DIR -Filter *.dll
+          if ($dlls.Count -eq 0) {
+            Write-Error "❌ No DLLs found in output directory ($env:OUTPUT_DIR) to sign."
+            exit 1
+          }
+
+          foreach ($dll in $dlls) {
+            Write-Host "🔏 Signing $($dll.Name)..."
+            $signArgs = @(
+              "sign",
+              "/f", $env:SIGNER_PATH,
+              "/p", $password,
+              "/fd", "sha256",
+              "/tr", "http://timestamp.digicert.com",
+              "/td", "sha256",
+              $dll.FullName
+            )
+
+            & $signtool.FullName @signArgs
+            if ($LASTEXITCODE -ne 0) {
+              Write-Error "❌ Failed to sign $($dll.FullName)"
+              exit 1
+            }
+          }
+
+          Write-Host "✅ All DLLs successfully signed!"
         shell: pwsh
+
 
       - name: Zip Plugins
         run: |
