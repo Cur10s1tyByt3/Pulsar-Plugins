@@ -16,23 +16,12 @@ jobs:
       ZIP_NAME: plugins-${{ github.run_number }}.zip
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository with submodules
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
-
-      - name: Ensure Submodules Initialized (deep recursive)
-        run: |
-          git submodule sync --recursive
-          git submodule update --init --recursive --force
-          git submodule foreach --recursive '
-            echo "→ Initializing nested submodules in $name"
-            git submodule sync --recursive
-            git submodule update --init --recursive --force
-          '
-        shell: bash
-
 
       - name: Setup .NET 9.0
         uses: actions/setup-dotnet@v4
