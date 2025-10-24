@@ -21,14 +21,6 @@ jobs:
         with:
           token: ${{ secrets.MY_PAT }}
           submodules: recursive
-          fetch-depth: 0
-          ssh-strict: false
-          persist-credentials: true
-          clean: true
-          fetch-tags: false
-          show-progress: true
-          lfs: false
-          set-safe-directory: true
 
       - name: Clone submodules
         run: |
