@@ -60,15 +60,23 @@ jobs:
 
       - name: Collect Plugin DLLs
         run: |
-          Get-ChildItem -Path . -Recurse -Filter "*.dll" | ForEach-Object {
+          Write-Host "Looking for DLLs in: $(Get-Location)"
+          Write-Host "Output directory: $env:OUTPUT_DIR"
+          $dlls = Get-ChildItem -Path . -Recurse -Filter "*.dll"
+          Write-Host "Found $($dlls.Count) DLL files"
+          
+          $dlls | ForEach-Object {
             $dll = $_.FullName
             $folder = Split-Path (Split-Path $dll -Parent) -Leaf
             $name = Split-Path $dll -LeafBase
+            Write-Host "Checking: $dll (folder: $folder, name: $name)"
             if ($name -eq $folder) {
-              Write-Host "Copying $dll"
+              Write-Host "Copying $dll to $env:OUTPUT_DIR"
               Copy-Item $dll -Destination $env:OUTPUT_DIR -Force
             }
           }
+          Write-Host "Contents of output directory:"
+          Get-ChildItem -Path $env:OUTPUT_DIR -Recurse
         shell: pwsh
 
       - name: Set Signer Path
@@ -77,7 +85,14 @@ jobs:
 
       - name: Decode PFX Certificate
         run: |
+          if ("${{ secrets.SIGNER_PFX }}" -eq "") {
+            Write-Host "WARNING: SIGNER_PFX secret is empty!"
+            exit 1
+          }
+          Write-Host "SIGNER_PFX secret length: $("${{ secrets.SIGNER_PFX }}".Length) characters"
           [IO.File]::WriteAllBytes($env:SIGNER_PATH, [Convert]::FromBase64String("${{ secrets.SIGNER_PFX }}"))
+          Write-Host "PFX file created at: $env:SIGNER_PATH"
+          Write-Host "PFX file size: $(Get-Item $env:SIGNER_PATH | Select-Object -ExpandProperty Length) bytes"
         shell: pwsh
 
       - name: Sign DLLs
