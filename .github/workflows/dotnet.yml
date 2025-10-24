@@ -49,15 +49,21 @@ jobs:
           New-Item -ItemType Directory -Path $env:OUTPUT_DIR | Out-Null
         shell: pwsh
 
-      - name: Collect Plugin DLLs
+      - name: Collect Plugin DLLs (with Costura embeddings)
         run: |
-          $dlls = Get-ChildItem -Path . -Recurse -Filter "Pulsar.Plugin*.dll"
+          $dlls = Get-ChildItem -Path . -Recurse -Filter "Pulsar.Plugin*.dll" | Where-Object { $_.FullName -match "\\bin\\$env:BUILD_CONFIG\\" }
           Write-Host "Found $($dlls.Count) Pulsar.Plugin DLL files"
           
+          if ($dlls.Count -eq 0) {
+            Write-Error "❌ No plugin DLLs found in bin\Release directories"
+            exit 1
+          }
+          
           $dlls | ForEach-Object {
-            Write-Host "Copying $($_.Name)"
+            Write-Host "Copying $($_.Name) from $($_.DirectoryName)"
             Copy-Item $_.FullName -Destination $env:OUTPUT_DIR -Force
           }
+          
           Write-Host ""
           Write-Host "Contents of output directory:"
           Get-ChildItem -Path $env:OUTPUT_DIR | Select-Object Name, Length
@@ -82,7 +88,6 @@ jobs:
 
           Write-Host "✅ Found signtool at: $($signtool.FullName)"
 
-          # Sign all DLLs in the output folder
           $dlls = Get-ChildItem -Path $env:OUTPUT_DIR -Filter *.dll
           if ($dlls.Count -eq 0) {
             Write-Error "❌ No DLLs found in output directory ($env:OUTPUT_DIR) to sign."
@@ -110,7 +115,6 @@ jobs:
 
           Write-Host "✅ All DLLs successfully signed!"
         shell: pwsh
-
 
       - name: Zip Plugins
         run: |
