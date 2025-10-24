@@ -25,14 +25,26 @@ jobs:
 
       - name: Debug submodules
         run: |
+          echo "=== Checking if .gitmodules exists ==="
+          ls -la .gitmodules || echo ".gitmodules NOT FOUND"
+          echo ""
+          echo "=== Contents of .gitmodules ==="
+          cat .gitmodules || echo "Cannot read .gitmodules"
+          echo ""
+          echo "=== Git config submodule list ==="
+          git config --file .gitmodules --list || echo "No submodules in config"
+          echo ""
           echo "=== Checking submodule status ==="
           git submodule status --recursive
+          echo ""
           echo "=== Forcing full recursive update ==="
           git submodule update --init --recursive --force
+          echo ""
           echo "=== Final status ==="
           git submodule status --recursive
-          echo "=== Listing External/Poopsar ==="
-          ls -la External/Poopsar/
+          echo ""
+          echo "=== Listing External/ directory ==="
+          ls -la External/ 2>/dev/null || echo "External directory does not exist"
         shell: bash
 
       - name: Setup .NET 9.0
