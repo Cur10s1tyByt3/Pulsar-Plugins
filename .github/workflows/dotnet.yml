@@ -19,7 +19,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.MY_PAT }}
           submodules: recursive
+          fetch-depth: 0
+          ssh-strict: false
+          persist-credentials: true
+          clean: true
+          fetch-tags: false
+          show-progress: true
+          lfs: false
+          set-safe-directory: true
 
       - name: Clone submodules
         run: |
@@ -51,23 +60,16 @@ jobs:
 
       - name: Collect Plugin DLLs
         run: |
-          Write-Host "Looking for DLLs in: $(Get-Location)"
-          Write-Host "Output directory: $env:OUTPUT_DIR"
-          $dlls = Get-ChildItem -Path . -Recurse -Filter "*.dll"
-          Write-Host "Found $($dlls.Count) DLL files"
+          $dlls = Get-ChildItem -Path . -Recurse -Filter "Pulsar.Plugin*.dll"
+          Write-Host "Found $($dlls.Count) Pulsar.Plugin DLL files"
           
           $dlls | ForEach-Object {
-            $dll = $_.FullName
-            $folder = Split-Path (Split-Path $dll -Parent) -Leaf
-            $name = Split-Path $dll -LeafBase
-            Write-Host "Checking: $dll (folder: $folder, name: $name)"
-            if ($name -eq $folder) {
-              Write-Host "Copying $dll to $env:OUTPUT_DIR"
-              Copy-Item $dll -Destination $env:OUTPUT_DIR -Force
-            }
+            Write-Host "Copying $($_.Name)"
+            Copy-Item $_.FullName -Destination $env:OUTPUT_DIR -Force
           }
+          Write-Host ""
           Write-Host "Contents of output directory:"
-          Get-ChildItem -Path $env:OUTPUT_DIR -Recurse
+          Get-ChildItem -Path $env:OUTPUT_DIR | Select-Object Name, Length
         shell: pwsh
 
       - name: Sign DLLs (optional)
