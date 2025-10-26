@@ -8,4 +8,9 @@
     <ProjectReference Include="..\..\External\Poopsar\Pulsar.Server\Pulsar.Server.csproj" />
   </ItemGroup>
 
+  <Target Name="CopyToPlugins" AfterTargets="Build">
+    <MakeDir Directories="$(ProjectDir)..\..\plugins" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ProjectDir)..\..\plugins" />
+  </Target>
+
 </Project>

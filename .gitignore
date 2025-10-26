@@ -211,3 +211,5 @@ Pulsar.Server/DeferredAssemblies/*
 !Pulsar.Server/DeferredAssemblies/README.md
 
 SignTest
+
+plugins

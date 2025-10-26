@@ -14,4 +14,9 @@
 	  </Reference>
 	</ItemGroup>
 
+	<Target Name="CopyToPlugins" AfterTargets="Build">
+		<MakeDir Directories="$(ProjectDir)..\..\plugins" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ProjectDir)..\..\plugins" />
+	</Target>
+
 </Project>
