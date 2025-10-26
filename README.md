@@ -2,7 +2,7 @@
 
 This repository contains official and community plugin projects for the **Pulsar** ecosystem.
 
-Plugins extend the functionality of the Pulsar client and server by using shared code from [`Pulsar.Common`](https://github.com/Quasar-Continuation/Poopsar/tree/main/Pulsar.Common).
+Plugins extend the functionality of the Pulsar client and server by using shared code from [`Pulsar.Common`](https://github.com/Quasar-Continuation/PulsarV2/tree/main/Pulsar.Common).
 
 ---
 
@@ -24,7 +24,7 @@ git submodule update --init --recursive
 
 ### 🔄 Updating to the Latest Pulsar.Common
 
-To update your local copy to the newest version from the Poopsar repository:
+To update your local copy to the newest version from the PulsarV2 repository:
 
 ```bash
 git submodule update --remote --merge
