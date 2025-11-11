@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Common", "External\PulsarV2\Pulsar.Common\Pulsar.Common.csproj", "{0B95FC2E-2593-108E-45FD-378A158F2E32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Common", "External\Poopsar\Pulsar.Common\Pulsar.Common.csproj", "{0B95FC2E-2593-108E-45FD-378A158F2E32}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pulsar.Plugin.Example", "Pulsar.Plugin.Example", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.MessageBox.Se
 		{E26DF779-8FCA-0041-D19B-C7F0D1DF655E} = {E26DF779-8FCA-0041-D19B-C7F0D1DF655E}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Server", "External\PulsarV2\Pulsar.Server\Pulsar.Server.csproj", "{E26DF779-8FCA-0041-D19B-C7F0D1DF655E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Server", "External\Poopsar\Pulsar.Server\Pulsar.Server.csproj", "{E26DF779-8FCA-0041-D19B-C7F0D1DF655E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pulsar.Plugin.UserCheck", "Pulsar.Plugin.UserCheck", "{D502ED50-057E-443D-8357-4833A4951121}"
 EndProject
