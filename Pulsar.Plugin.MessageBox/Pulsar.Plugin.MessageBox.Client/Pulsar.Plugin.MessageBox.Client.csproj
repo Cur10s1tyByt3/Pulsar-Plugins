@@ -5,7 +5,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\External\PulsarV2\Pulsar.Common\Pulsar.Common.csproj" />
+		<ProjectReference Include="..\..\External\Poopsar\Pulsar.Common\Pulsar.Common.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
