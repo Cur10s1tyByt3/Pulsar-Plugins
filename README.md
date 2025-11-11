@@ -10,21 +10,37 @@ Plugins extend the functionality of the Pulsar client and server by using shared
 
 ### 🧩 1. Clone the repository with submodules
 
-> `Pulsar.Common` is required for all plugin builds.  
-> Clone using the command below to automatically include it.
+`Pulsar.Common` (the Poopsar repository) is required for all plugin builds.
+
+Recommended (one-step):
 
 ```bash
 git clone --recurse-submodules https://github.com/Quasar-Continuation/Pulsar-Plugins.git
-If you already cloned it normally, just run:
+```
 
-bash
-Copy code
+If you already cloned without submodules, initialize them with:
+
+```bash
 git submodule update --init --recursive
+```
+
+If the above command does not create the expected folders (for example `External/Poopsar`), this repository includes helper scripts that will attempt to initialize submodules and fall back to cloning the configured URLs.
+
+Windows (PowerShell):
+
+```powershell
+pwsh.exe .\scripts\init-submodules.ps1
+```
+
+macOS / Linux / Git Bash:
+
+```bash
+./scripts/init-submodules.sh
 ```
 
 ### 🔄 Updating to the Latest Pulsar.Common
 
-To update your local copy to the newest version from the Poopsar repository:
+To update the Poopsar submodule to the latest upstream changes:
 
 ```bash
 git submodule update --remote --merge
