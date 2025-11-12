@@ -1,0 +1,75 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.8.1": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.8.1": [
+      "C:\\Users\\User\\Desktop\\Pulsar-Plugins-main\\External\\Poopsar\\Pulsar.Common\\Pulsar.Common.csproj"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\User\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\Pulsar-Plugins-main\\Pulsar.Plugin.Dihcord\\Pulsar.Plugin.Dihcord.Client\\Pulsar.Plugin.Dihcord.Client.csproj",
+      "projectName": "Pulsar.Plugin.Dihcord.Client",
+      "projectPath": "C:\\Users\\User\\Desktop\\Pulsar-Plugins-main\\Pulsar.Plugin.Dihcord\\Pulsar.Plugin.Dihcord.Client\\Pulsar.Plugin.Dihcord.Client.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\Pulsar-Plugins-main\\Pulsar.Plugin.Dihcord\\Pulsar.Plugin.Dihcord.Client\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net481"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net481": {
+          "targetAlias": "net481",
+          "projectReferences": {
+            "C:\\Users\\User\\Desktop\\Pulsar-Plugins-main\\External\\Poopsar\\Pulsar.Common\\Pulsar.Common.csproj": {
+              "projectPath": "C:\\Users\\User\\Desktop\\Pulsar-Plugins-main\\External\\Poopsar\\Pulsar.Common\\Pulsar.Common.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
+    },
+    "frameworks": {
+      "net481": {
+        "targetAlias": "net481",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306\\RuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1104",
+      "level": "Error",
+      "message": "Unable to find project 'C:\\Users\\User\\Desktop\\Pulsar-Plugins-main\\External\\Poopsar\\Pulsar.Common\\Pulsar.Common.csproj'. Check that the project reference is valid and that the project file exists.",
+      "libraryId": "C:\\Users\\User\\Desktop\\Pulsar-Plugins-main\\External\\Poopsar\\Pulsar.Common\\Pulsar.Common.csproj",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.8.1"
+      ]
+    }
+  ]
+}
