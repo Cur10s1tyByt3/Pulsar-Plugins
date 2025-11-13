@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36408.4
@@ -49,11 +49,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.RanReg.Client
 		{0B95FC2E-2593-108E-45FD-378A158F2E32} = {0B95FC2E-2593-108E-45FD-378A158F2E32}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pulsar.Plugin.Dihcord", "Pulsar.Plugin.Dihcord", "{0570B189-23DE-440A-AE33-9C258A9B88D3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pulsar.Plugin.DiscordGrab", "Pulsar.Plugin.DiscordGrab", "{0570B189-23DE-440A-AE33-9C258A9B88D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.Dihcord.Client", "Pulsar.Plugin.Dihcord\Pulsar.Plugin.Dihcord.Client\Pulsar.Plugin.Dihcord.Client.csproj", "{C74CDD25-BDCB-4D20-B67B-1C2CB1692005}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.DiscordGrab.Client", "Pulsar.Plugin.Dihcord\Pulsar.Plugin.Dihcord.Client\Pulsar.Plugin.DiscordGrab.Client.csproj", "{C74CDD25-BDCB-4D20-B67B-1C2CB1692005}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.Dihcord.Server", "Pulsar.Plugin.Dihcord\Pulsar.Plugin.Dihcord.Server\Pulsar.Plugin.Dihcord.Server.csproj", "{25DF80FC-C785-4FA4-BB09-75CE181C4A75}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.DiscordGrab.Server", "Pulsar.Plugin.Dihcord\Pulsar.Plugin.Dihcord.Server\Pulsar.Plugin.DiscordGrab.Server.csproj", "{25DF80FC-C785-4FA4-BB09-75CE181C4A75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
