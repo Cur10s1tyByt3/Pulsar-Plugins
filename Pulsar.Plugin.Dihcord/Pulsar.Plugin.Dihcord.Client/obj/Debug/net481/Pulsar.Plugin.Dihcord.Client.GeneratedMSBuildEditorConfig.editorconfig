@@ -1,8 +1,0 @@
-is_global = true
-build_property.RootNamespace = Pulsar.Plugin.Dihcord.Client
-build_property.ProjectDir = C:\Users\User\Desktop\Pulsar-Plugins-main\Pulsar.Plugin.Dihcord\Pulsar.Plugin.Dihcord.Client\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
-build_property.CsWinRTUseWindowsUIXamlProjections = false
-build_property.EffectiveAnalysisLevelStyle = 
-build_property.EnableCodeStyleSeverity = 
