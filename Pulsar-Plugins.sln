@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36408.4
@@ -49,6 +49,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.RanReg.Client
 		{0B95FC2E-2593-108E-45FD-378A158F2E32} = {0B95FC2E-2593-108E-45FD-378A158F2E32}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pulsar.Plugin.Dihcord", "Pulsar.Plugin.Dihcord", "{0570B189-23DE-440A-AE33-9C258A9B88D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.Dihcord.Client", "Pulsar.Plugin.Dihcord\Pulsar.Plugin.Dihcord.Client\Pulsar.Plugin.Dihcord.Client.csproj", "{C74CDD25-BDCB-4D20-B67B-1C2CB1692005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pulsar.Plugin.Dihcord.Server", "Pulsar.Plugin.Dihcord\Pulsar.Plugin.Dihcord.Server\Pulsar.Plugin.Dihcord.Server.csproj", "{25DF80FC-C785-4FA4-BB09-75CE181C4A75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +99,14 @@ Global
 		{8E416C4D-94D6-4271-948C-F68547A713CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E416C4D-94D6-4271-948C-F68547A713CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E416C4D-94D6-4271-948C-F68547A713CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C74CDD25-BDCB-4D20-B67B-1C2CB1692005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C74CDD25-BDCB-4D20-B67B-1C2CB1692005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C74CDD25-BDCB-4D20-B67B-1C2CB1692005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C74CDD25-BDCB-4D20-B67B-1C2CB1692005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25DF80FC-C785-4FA4-BB09-75CE181C4A75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25DF80FC-C785-4FA4-BB09-75CE181C4A75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25DF80FC-C785-4FA4-BB09-75CE181C4A75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25DF80FC-C785-4FA4-BB09-75CE181C4A75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +120,8 @@ Global
 		{B16B99F6-E593-4226-B77D-3E838A414308} = {D502ED50-057E-443D-8357-4833A4951121}
 		{6D63F70E-1403-4992-AD58-32A2B3C56B23} = {F9DBEE0F-2FC9-4782-9763-BA2750EC1D97}
 		{8E416C4D-94D6-4271-948C-F68547A713CF} = {F9DBEE0F-2FC9-4782-9763-BA2750EC1D97}
+		{C74CDD25-BDCB-4D20-B67B-1C2CB1692005} = {0570B189-23DE-440A-AE33-9C258A9B88D3}
+		{25DF80FC-C785-4FA4-BB09-75CE181C4A75} = {0570B189-23DE-440A-AE33-9C258A9B88D3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B6F93F9-C76A-4DA8-B2AB-17B7848DB21A}
